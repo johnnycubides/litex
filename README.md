@@ -2,26 +2,43 @@
 
 **Observación**: 
 * Tenga en cuenta que en ocaciones puede requerir permisos de SUPERUSUARIO
-* Pueda que no sea suficiente con las instrucciones mostradas a continuación, le invito a abrir hilos o `issues` para poder sugerir las correspondientes ayudas.
+* Pueda que no sea suficiente con las instrucciones mostradas a continuación; le invito a abrir `issues` para sugerir ayudas.
 
 
-## Paquetes a instalar
+## Paquetes que se instalarán en la imagen
 
 * Litex
-* yosys
-* verilator
-* openocd
-* risc-v toolchain
-* lm-32 toolchain:w
+* Yosys
+* Verilator
+* Openocd
+* Risc-v toolchain
+* Lm-32 toolchain
 
-## Construcción de imagen
+## Generación de imagen en su PC
+
+Para éste fin hay dos maneras posibles de hacerlo:
+
+* Construyendo su propia imagen (haciendo uso del Dockerfile)
+* Halando la imagen (hacer pull) desde dockerhub (imagen preconstruida)
+
+A continuación se describe cómo **hacer alguna de estas dos operaciones** (no haga las dos!!!):
+
+
+### Pull de imagen construida en Dockerhub
+
+```bash
+docker pull johnnycubides/litex
+```
+
+### Construcción de imagen (de manera manual)
 
 ```bash
 git clone https://github.com/johnnycubides/litex.git
 cd litex
 docker build -t litex-img -f Dockerfile .
 ```
-## Intanciar imagen (crear contenedor)
+
+## Instanciar imagen (crear contenedor)
 
 Ubicarse en el directorio que usted eligió para trabajar sus proyectos el cual
 compartirá con el contendor y luego haga lo siguiente:
@@ -56,4 +73,5 @@ docker exec -it litex bash
 Atentamente:
 
 Johnny Cubides
+
 jgcubidesc@gmail.com
