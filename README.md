@@ -18,19 +18,19 @@
 
 Para éste fin hay dos maneras posibles de hacerlo:
 
-* Construyendo su propia imagen (haciendo uso del Dockerfile)
-* Halando la imagen (hacer pull) desde dockerhub (imagen preconstruida)
+1. Construyendo su propia imagen (haciendo uso del Dockerfile)
+2. Halando la imagen (hacer pull) desde dockerhub (imagen preconstruida)
 
 A continuación se describe cómo **hacer alguna de estas dos operaciones** (no haga las dos!!!):
 
 
-### Pull de imagen construida en Dockerhub
+### 1. Pull de imagen construida en Dockerhub
 
 ```bash
 docker pull johnnycubides/litex
 ```
 
-### Construcción de imagen (de manera manual)
+### 2. Construcción de imagen (de manera manual)
 
 ```bash
 git clone https://github.com/johnnycubides/litex.git
@@ -40,8 +40,9 @@ docker build -t litex-img -f Dockerfile .
 
 ## Instanciar imagen (crear contenedor)
 
-Ubicarse en el directorio que usted eligió para trabajar sus proyectos el cual
-compartirá con el contendor y luego haga lo siguiente:
+Luego tener la imagen en su equipo (puede comprobar ésto con `docker images`),
+ubíquese en el directorio que usted eligió para trabajar sus proyectos el cual
+compartirá con el contenedor y luego haga lo siguiente:
 
 ```bash
 docker run -v $(pwd):/home --name litex -it -d litex-img
