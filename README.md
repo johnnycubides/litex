@@ -40,17 +40,18 @@ docker build -t litex-img -f Dockerfile .
 
 ## Instanciar imagen (crear contenedor)
 
-Luego tener la imagen en su equipo (puede comprobar ésto con `docker images`),
+Luego de tener la imagen en su equipo (puede comprobar ésto con `docker images`),
 ubíquese en el directorio que usted eligió para trabajar sus proyectos el cual
 compartirá con el contenedor y luego haga lo siguiente:
 
 ```bash
-docker run -v $(pwd):/home --name litex -it -d litex-img
+docker run --privileged -v /dev/bus/usb:/dev/bus/usb -v $(pwd):/home --name litex -it -d johnnycubides/litex
 ```
 
 ## Verificación de contendor creado y corriendo
 
-Al ejecutar el siguiente comando debe aparecer en la lista de los contenedores corriendo
+Al ejecutar el siguiente comando debe aparecer en la lista de los contenedores el contenedor
+litex corriendo.
 
 ```bash
 docker container ps
