@@ -1,13 +1,15 @@
 ### IMAGEN BASE ###
 FROM debian:buster
 
-### INTALACIÓN DE LITEX ###
+### TOOLS ###
 RUN apt-get update
+RUN apt-get install -y libusb-1.0-0 usbutils libftdi1
+
+### INTALACIÓN DE LITEX ###
 RUN apt-get install -y python3 python3-setuptools git wget nano
 RUN wget --no-verbose --continue https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py && \
     python3 litex_setup.py init install && \
     python3 litex_setup.py update
-
 
 ### DEPENDENCIAS PARA YOSIS ICESTORM, NEXTPNR Y ARACHNE-PNR ###
 RUN apt-get install -y build-essential clang bison flex libreadline-dev \
@@ -27,13 +29,15 @@ RUN git clone https://github.com/cliffordwolf/yosys.git yosys && \
       make -j$(nproc) && \
       make install
 
-### DEJARÁ DE SER MANTENIDO SU REMPLAZO ES nextpnr ###
-# RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
-#       cd arachne-pnr && \
-#       make -j$(nproc) && \
-#       make install
+### ARACHNE-PNR ###
+### DEJARÁ DE SER MANTENIDO, SU REMPLAZO ES nextpnr ###
+RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
+      cd arachne-pnr && \
+      make -j$(nproc) && \
+      make install
 
-### SUSTITUTO DE arachne-pnr ###
+### NEXTPNR ###
+### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
 # RUN apt-get install -y cmake qt5-default
 # RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
 #       cd nextpnr && \
