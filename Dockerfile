@@ -3,7 +3,7 @@ FROM debian:buster
 
 ### TOOLS ###
 RUN apt-get update
-RUN apt-get install -y libusb-1.0-0 usbutils libftdi1
+RUN apt-get install -y libusb-1.0-0 usbutils libftdi1 busybox
 
 ### INTALACIÓN DE LITEX ###
 RUN apt-get install -y python3 python3-setuptools git wget nano
@@ -38,12 +38,12 @@ RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
 
 ### NEXTPNR ###
 ### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
-# RUN apt-get install -y cmake qt5-default
-# RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
-#       cd nextpnr && \
-#       cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local . && \
-#       make -j$(nproc) && \
-#       make install
+RUN apt-get install -y cmake qt5-default libeigen3-dev
+RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
+      cd nextpnr && \
+      cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local . && \
+      make -j$(nproc) && \
+      make install
 
 ### VERILATOR PARA SIMULAR ###
 RUN apt-get install -y verilator libevent-dev libjson-c-dev
