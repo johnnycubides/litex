@@ -85,4 +85,6 @@ RUN cd /opt/ && \
       rm lm32_linux_i386.tar.bz2 && \
       echo 'export PATH=/opt/lm32/bin/:$PATH' >> /root/.bashrc
 
+RUN apt-get install -y vim
+
 CMD '/bin/bash'
