@@ -9,10 +9,14 @@
 
 * Litex
 * Yosys
+* arachne-pnr
+* nextpnr
 * Verilator
 * Openocd
 * Risc-v toolchain
 * Lm-32 toolchain
+* busybox
+
 
 ## Generación de imagen en su PC
 
