@@ -10,13 +10,13 @@
 * Litex
 * Yosys
 * arachne-pnr
-* nextpnr
+* nextpnr [ic40hc y ecp5]
 * Verilator
 * Openocd
 * Risc-v toolchain
 * Lm-32 toolchain
 * busybox
-
+* vim
 
 ## Generación de imagen en su PC
 
@@ -50,6 +50,12 @@ compartirá con el contenedor y luego haga lo siguiente:
 
 ```bash
 docker run --privileged -v /dev/bus/usb:/dev/bus/usb -v $(pwd):/home --name litex -it -d johnnycubides/litex
+```
+
+Si requiere hacer uso de alguna aplicación con GUI podría hacer uso de éste comando:
+
+```bash
+docker run --privileged --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" --net=host -v /dev/bus/usb:/dev/bus/usb -v $(pwd):/home --name litex -it -d johnnycubides/litex
 ```
 
 ## Verificación de contendor creado y corriendo

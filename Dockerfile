@@ -87,4 +87,18 @@ RUN cd /opt/ && \
 
 RUN apt-get install -y vim
 
+RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
+      cd prjtrellis/libtrellis && \
+      cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
+      make && \
+      make install && \
+      cmake -DARCH=ecp5 -DTRELLIS_ROOT=prjtrellis . && \
+      make -j$(nproc) && \
+      make install
+
+RUN cd nextpnr && \
+      cmake -DARCH=ecp5 -DTRELLIS_ROOT=/prjtrellis . && \
+      make -j$(nproc) && \
+      make install
+
 CMD '/bin/bash'
