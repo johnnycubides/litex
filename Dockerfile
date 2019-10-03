@@ -35,13 +35,13 @@ RUN git clone https://github.com/cliffordwolf/yosys.git yosys && \
       make -j$(nproc) && \
       make install
 
-# ### NEXTPNR ###
-# ### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
-# RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
-#       cd nextpnr && \
-#       cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local . && \
-#       make -j$(nproc) && \
-#       make install
+### NEXTPNR ###
+### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
+RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
+      cd nextpnr && \
+      cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local . && \
+      make -j$(nproc) && \
+      make install
 
 # RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
 #       cd prjtrellis/libtrellis && \
