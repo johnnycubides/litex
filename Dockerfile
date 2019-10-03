@@ -1,15 +1,19 @@
 ### IMAGEN BASE ###
 FROM debian:buster
 
+WORKDIR /opt/
+
 ### TOOLS ###
 RUN apt-get update
-RUN apt-get install -y libusb-1.0-0 usbutils libftdi1 busybox
+RUN apt-get install -y libusb-1.0-0 usbutils libftdi1 busybox vim
 
 ### DEPENDENCIAS PARA YOSIS ICESTORM, NEXTPNR Y ARACHNE-PNR ###
 RUN apt-get install -y build-essential clang bison flex libreadline-dev \
       gawk tcl-dev libffi-dev mercurial graphviz   \
       xdot pkg-config python libftdi-dev \
-      qt5-default python3-dev libboost-all-dev cmake wget
+      python3-dev libboost-all-dev cmake wget \
+      python3 python3-setuptools git nano \
+      cmake libeigen3-dev
 
 RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
       tar xvf libseccomp-2.4.1.tar.gz && \
@@ -19,8 +23,6 @@ RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libsecco
       make [V=0] && \
       make install
 
-RUN apt-get install -y python3 python3-setuptools git nano
-
 ### INSTALACIÓN DE ICESTORM ###
 RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
       cd icestorm && \
@@ -29,15 +31,24 @@ RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
 
 ### NEXTPNR ###
 ### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
-RUN apt-get install -y cmake qt5-default libeigen3-dev
 RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
       cd nextpnr && \
-      cmake -DARCH=ice40 -DCMAKE_INSTALL_PREFIX=/usr/local . && \
+      cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local . && \
+      make -j$(nproc) && \
+      make install
+
+RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
+      cd prjtrellis/libtrellis && \
+      cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
+      make && \
+      make install
+
+RUN cd nextpnr && \
+      cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
       make -j$(nproc) && \
       make install
 
 ### INTALACIÓN DE LITEX ###
-RUN apt-get install -y python3 python3-setuptools git nano
 RUN wget --no-verbose --continue https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py && \
     python3 litex_setup.py init install && \
     python3 litex_setup.py update
@@ -55,8 +66,8 @@ RUN git clone https://github.com/cseed/arachne-pnr.git arachne-pnr && \
       make -j$(nproc) && \
       make install
 
-### VERILATOR PARA SIMULAR ###
-RUN apt-get install -y verilator libevent-dev libjson-c-dev
+### VERILATOR Y GTKWAVE PARA SIMULAR ###
+RUN apt-get install -y verilator libevent-dev libjson-c-dev gtkwave
 
 ### OPENOCD PARA PRUEBAS DE HARDWARE ###
 # Observación, debe ser verificado
@@ -84,21 +95,5 @@ RUN cd /opt/ && \
       tar -xvjf lm32_linux_i386.tar.bz2 && \
       rm lm32_linux_i386.tar.bz2 && \
       echo 'export PATH=/opt/lm32/bin/:$PATH' >> /root/.bashrc
-
-RUN apt-get install -y vim
-
-RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
-      cd prjtrellis/libtrellis && \
-      cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
-      make && \
-      make install && \
-      cmake -DARCH=ecp5 -DTRELLIS_ROOT=prjtrellis . && \
-      make -j$(nproc) && \
-      make install
-
-RUN cd nextpnr && \
-      cmake -DARCH=ecp5 -DTRELLIS_ROOT=/prjtrellis . && \
-      make -j$(nproc) && \
-      make install
 
 CMD '/bin/bash'
