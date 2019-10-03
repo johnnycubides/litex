@@ -7,13 +7,13 @@ WORKDIR /opt/
 RUN apt-get update
 RUN apt-get install -y libusb-1.0-0 usbutils libftdi1 busybox vim
 
-# ### DEPENDENCIAS PARA YOSIS ICESTORM, NEXTPNR Y ARACHNE-PNR ###
-# RUN apt-get install -y build-essential clang bison flex libreadline-dev \
-#       gawk tcl-dev libffi-dev mercurial graphviz   \
-#       xdot pkg-config python libftdi-dev \
-#       python3-dev libboost-all-dev cmake wget \
-#       python3 python3-setuptools git nano \
-#       cmake libeigen3-dev
+### DEPENDENCIAS PARA YOSIS ICESTORM, NEXTPNR Y ARACHNE-PNR ###
+RUN apt-get install -y build-essential clang bison flex libreadline-dev \
+      gawk tcl-dev libffi-dev mercurial graphviz   \
+      xdot pkg-config python libftdi-dev \
+      python3-dev libboost-all-dev cmake wget \
+      python3 python3-setuptools git nano \
+      cmake libeigen3-dev
 
 # RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
 #       tar xvf libseccomp-2.4.1.tar.gz && \
