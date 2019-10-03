@@ -9,10 +9,10 @@ RUN apt-get install -y libusb-1.0-0 usbutils libftdi1 busybox vim
 
 ### DEPENDENCIAS PARA YOSIS ICESTORM, NEXTPNR Y ARACHNE-PNR ###
 RUN apt-get install -y build-essential clang bison flex libreadline-dev \
-      gawk tcl-dev libffi-dev mercurial graphviz   \
+      gawk tcl-dev libffi-dev git mercurial graphviz   \
       xdot pkg-config python libftdi-dev \
       python3-dev libboost-all-dev cmake wget \
-      python3 python3-setuptools git nano \
+      python3 python3-setuptools nano \
       cmake libeigen3-dev
 
 # RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
@@ -23,11 +23,17 @@ RUN apt-get install -y build-essential clang bison flex libreadline-dev \
 #       make [V=0] && \
 #       make install
 
-# ### INSTALACIÓN DE ICESTORM ###
-# RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
-#       cd icestorm && \
-#       make -j$(nproc) && \
-#       make install
+### INSTALACIÓN DE ICESTORM ###
+RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
+      cd icestorm && \
+      make -j$(nproc) && \
+      make install
+
+### INSTALACIÓN DE YOSYS ###
+RUN git clone https://github.com/cliffordwolf/yosys.git yosys && \
+      cd yosys && \
+      make -j$(nproc) && \
+      make install
 
 # ### NEXTPNR ###
 # ### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
@@ -52,12 +58,6 @@ RUN apt-get install -y build-essential clang bison flex libreadline-dev \
 # RUN wget --no-verbose --continue https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py && \
 #     python3 litex_setup.py init install && \
 #     python3 litex_setup.py update
-
-# ### INSTALACIÓN DE YOSYS ###
-# RUN git clone https://github.com/cliffordwolf/yosys.git yosys && \
-#       cd yosys && \
-#       make -j$(nproc) && \
-#       make install
 
 # ### ARACHNE-PNR ###
 # ### DEJARÁ DE SER MANTENIDO, SU REMPLAZO ES nextpnr ###
