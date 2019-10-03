@@ -43,11 +43,11 @@ RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
       make -j$(nproc) && \
       make install
 
-# RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
-#       cd prjtrellis/libtrellis && \
-#       cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
-#       make && \
-#       make install
+RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
+      cd prjtrellis/libtrellis && \
+      cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
+      make && \
+      make install
 
 # RUN cd nextpnr && \
 #       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
