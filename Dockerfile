@@ -101,4 +101,18 @@ RUN cd nextpnr && \
       make -j$(nproc) && \
       make install
 
+# RUN apt-get install -y autoconf autotools-dev curl libmpc-dev \
+#         libmpfr-dev libgmp-dev texinfo \
+#     gperf patchutils bc zlib1g-dev libexpat1-dev
+
+# RUN mkdir /opt/riscv32i
+
+# RUN git clone https://github.com/riscv/riscv-gnu-toolchain riscv-gnu-toolchain-rv32i && \
+#       cd riscv-gnu-toolchain-rv32i && \
+#       git checkout 411d134 && \
+#       git submodule update --init --recursive && \
+#       mkdir build; cd build && \
+#       ../configure --with-arch=rv32i --prefix=/opt/riscv32i && \
+#       make -j$(nproc)
+
 CMD '/bin/bash'
