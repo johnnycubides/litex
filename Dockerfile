@@ -37,22 +37,22 @@ RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libsecco
 
 ### NEXTPNR ###
 ### ÉSTE ES EL SUSTITUTO DE arachne-pnr ###
-RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
-      cd nextpnr && \
-      cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local . && \
-      make -j$(nproc) && \
-      make install
+# RUN git clone https://github.com/YosysHQ/nextpnr nextpnr && \
+#       cd nextpnr && \
+#       cmake -DARCH=ice40 -DBUILD_GUI=OFF -DCMAKE_INSTALL_PREFIX=/usr/local . && \
+#       make -j$(nproc) && \
+#       make install
 
-RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
-      cd prjtrellis/libtrellis && \
-      cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
-      make && \
-      make install
+# RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
+#       cd prjtrellis/libtrellis && \
+#       cmake -DCMAKE_INSTALL_PREFIX=/usr . && \
+#       make && \
+#       make install
 
-RUN cd nextpnr && \
-      cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
-      make -j$(nproc) && \
-      make install
+# RUN cd nextpnr && \
+#       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
+#       make -j$(nproc) && \
+#       make install
 
 # ### INTALACIÓN DE LITEX ###
 # RUN wget --no-verbose --continue https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py && \
