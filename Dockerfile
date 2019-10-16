@@ -15,14 +15,6 @@ RUN apt-get install -y build-essential clang bison flex libreadline-dev \
       python3 python3-setuptools nano \
       cmake libeigen3-dev
 
-# RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
-#       tar xvf libseccomp-2.4.1.tar.gz && \
-#       rm libseccomp-2.4.1.tar.gz && \
-#       cd libseccomp-2.4.1 && \
-#       ./configure && \
-#       make [V=0] && \
-#       make install
-
 ### INSTALACIÓN DE ICESTORM ###
 RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
       cd icestorm && \
@@ -33,6 +25,14 @@ RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
 RUN git clone https://github.com/cliffordwolf/yosys.git yosys && \
       cd yosys && \
       make -j$(nproc) && \
+      make install
+
+RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
+      tar xvf libseccomp-2.4.1.tar.gz && \
+      rm libseccomp-2.4.1.tar.gz && \
+      cd libseccomp-2.4.1 && \
+      ./configure && \
+      make [V=0] && \
       make install
 
 ### NEXTPNR ###
