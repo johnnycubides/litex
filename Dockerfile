@@ -54,7 +54,8 @@ RUN cd nextpnr && \
       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis .
 
 RUN cd nextpnr && \
-      make -j$(nproc)
+      # make -j$(nproc)
+      make
 
       # make install
 
