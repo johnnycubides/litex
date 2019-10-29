@@ -49,10 +49,10 @@ RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
       make && \
       make install
 
-# RUN cd nextpnr && \
-#       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
-#       make -j$(nproc) && \
-#       make install
+RUN cd nextpnr && \
+      cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
+      make -j$(nproc) && \
+      make install
 
 # ### INTALACIÓN DE LITEX ###
 # RUN wget --no-verbose --continue https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py && \
