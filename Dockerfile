@@ -52,7 +52,10 @@ RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
 RUN cd nextpnr && \
       # cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis . && \
       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis .
-      # make -j$(nproc) && \
+
+RUN cd nextpnr && \
+      make -j$(nproc) && \
+
       # make install
 
 # ### INTALACIÓN DE LITEX ###
