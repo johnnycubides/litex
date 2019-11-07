@@ -110,8 +110,9 @@ RUN git clone https://github.com/riscv/riscv-gnu-toolchain && \
       git submodule update --init --recursive
 # construyendo...
 RUN cd riscv-gnu-toolchain && \
-      /configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d && \
+      ./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d && \
       make linux
+      # make linux -j$(nproc)
 
 # RUN apt-get install -y autoconf autotools-dev curl libmpc-dev \
 #         libmpfr-dev libgmp-dev texinfo \
