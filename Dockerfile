@@ -107,7 +107,7 @@ RUN apt-get install -y autoconf automake autotools-dev curl libmpc-dev libmpfr-d
 # colando recursivamente
 RUN git clone https://github.com/riscv/riscv-gnu-toolchain && \
       cd riscv-gnu-toolchain && \
-      git submodule update --init --recursive && \
+      git submodule update --init --recursive
 # construyendo...
 RUN cd riscv-gnu-toolchain && \
       /configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d && \
