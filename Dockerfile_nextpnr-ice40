@@ -1,5 +1,7 @@
 FROM johnnycubides/linux-litex-base:base
 
+WORKDIR /opt/
+
 RUN wget https://github.com/seccomp/libseccomp/releases/download/v2.4.1/libseccomp-2.4.1.tar.gz && \
       tar xvf libseccomp-2.4.1.tar.gz && \
       rm libseccomp-2.4.1.tar.gz && \

@@ -1,5 +1,7 @@
 FROM johnnycubides/linux-litex-base:base
 
+WORKDIR /opt/
+
 ### INSTALACIÓN DE ICESTORM ###
 RUN git clone https://github.com/cliffordwolf/icestorm.git icestorm && \
       cd icestorm && \
