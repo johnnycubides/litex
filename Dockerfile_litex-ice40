@@ -1,0 +1,9 @@
+FROM johnnycubides/linux-nextpnr-ice40:nextpnr-ice40
+
+WORKDIR /opt/
+
+COPY --from=johnnycubides/linux-litex:litex /opt/litex /opt/litex
+
+RUN cd litex && \
+      python3 litex_setup.py update
+
