@@ -9,5 +9,5 @@ RUN git clone https://github.com/riscv/riscv-gnu-toolchain && \
 RUN cd riscv-gnu-toolchain && \
       ./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d
 # instalando 
-RUN cd riscv-gnu-toolchain && \
-      make linux
+# RUN cd riscv-gnu-toolchain && \
+#       make linux
