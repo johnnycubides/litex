@@ -4,10 +4,20 @@ FROM johnnycubides/linux-nextpnr-ice40:nextpnr-ice40
 WORKDIR /opt/
 
 # LITEX
+COPY --from=johnnycubides/linux-litex:litex /opt/migen /opt/migen
 COPY --from=johnnycubides/linux-litex:litex /opt/litex /opt/litex
+COPY --from=johnnycubides/linux-litex:litex /opt/liteeth /opt/liteeth
+COPY --from=johnnycubides/linux-litex:litex /opt/litedram /opt/litedram
+COPY --from=johnnycubides/linux-litex:litex /opt/litepcie /opt/litepcie
+COPY --from=johnnycubides/linux-litex:litex /opt/litesata /opt/litesata
+COPY --from=johnnycubides/linux-litex:litex /opt/litesdcard /opt/litesdcard
+COPY --from=johnnycubides/linux-litex:litex /opt/liteiclink /opt/liteiclink
+COPY --from=johnnycubides/linux-litex:litex /opt/litevideo /opt/litevideo
+COPY --from=johnnycubides/linux-litex:litex /opt/litescope /opt/litescope
+COPY --from=johnnycubides/linux-litex:litex /opt/litex-boards /opt/litex-boards
+COPY --from=johnnycubides/linux-litex:litex /opt/litex_setup.py /opt/litex_setup.py
 
-RUN cd litex && \
-      python3 litex_setup.py update
+RUN python3 litex_setup.py install
 
 ### VERILATOR ###
 RUN apt-get install -y verilator libevent-dev libjson-c-dev
