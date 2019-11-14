@@ -14,6 +14,7 @@ COPY --from=johnnycubides/linux-litex:litex /opt/litesdcard /opt/litesdcard
 COPY --from=johnnycubides/linux-litex:litex /opt/liteiclink /opt/liteiclink
 COPY --from=johnnycubides/linux-litex:litex /opt/litevideo /opt/litevideo
 COPY --from=johnnycubides/linux-litex:litex /opt/litescope /opt/litescope
+COPY --from=johnnycubides/linux-litex:litex /opt/litejesd204b /opt/litejesd204b
 COPY --from=johnnycubides/linux-litex:litex /opt/litex-boards /opt/litex-boards
 COPY --from=johnnycubides/linux-litex:litex /opt/litex_setup.py /opt/litex_setup.py
 
