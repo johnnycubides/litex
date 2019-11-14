@@ -1,0 +1,24 @@
+FROM johnnycubides/linux-nextpnr-ice40:nextpnr-ice40
+
+WORKDIR /opt/
+
+# TRELLIS
+RUN git clone --recursive https://github.com/SymbiFlow/prjtrellis && \
+      cd prjtrellis/libtrellis && \
+      cmake -DCMAKE_INSTALL_PREFIX=/usr .
+
+RUN cd nextpnr && \
+      make
+
+RUN cd nextpnr && \
+      make install
+
+# NEXTPNR ECP5
+RUN cd nextpnr && \
+      cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis .
+
+RUN cd nextpnr && \
+      make -j$(nproc)
+
+RUN cd nextpnr && \
+      make install
