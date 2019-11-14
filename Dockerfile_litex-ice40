@@ -1,9 +1,27 @@
+# YOSIS AND NEXTPNR
 FROM johnnycubides/linux-nextpnr-ice40:nextpnr-ice40
 
 WORKDIR /opt/
 
+# LITEX
 COPY --from=johnnycubides/linux-litex:litex /opt/litex /opt/litex
 
 RUN cd litex && \
       python3 litex_setup.py update
+
+### VERILATOR ###
+RUN apt-get install -y verilator libevent-dev libjson-c-dev
+
+# OPENOCD
+COPY --from=johnnycubides/linux-openocd:openocd /opt/openocd /opt/openocd
+
+RUN cd openocd && \
+      make install
+
+# LM32
+COPY --from=johnnycubides/linux-lm32:lm32 /opt/lm32 /opt/lm32
+
+RUN cd lm32 && \
+      echo 'export PATH=/opt/lm32/bin/:$PATH' >> /root/.bashrc
+
 
