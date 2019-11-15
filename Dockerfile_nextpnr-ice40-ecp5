@@ -13,9 +13,9 @@ RUN cd nextpnr && \
 RUN cd nextpnr && \
       make install
 
-# # NEXTPNR ECP5
-# RUN cd nextpnr && \
-#       cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis/libtrellis .
+# NEXTPNR ECP5
+RUN cd nextpnr && \
+      cmake -DARCH=ecp5 -DBUILD_GUI=OFF -DTRELLIS_ROOT=/opt/prjtrellis/libtrellis .
 
 # RUN cd nextpnr && \
 #       make -j$(nproc)
